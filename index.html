@@ -6,49 +6,26 @@
     <title>Our Wedding Invitation</title>
     <style>
         body { font-family: 'PingFang HK', 'Microsoft JhengHei', sans-serif; text-align: center; color: #4A4A4A; background: #fff5f5; margin: 0; padding: 0; line-height: 1.6; }
-        
-        /* 背景相片 bg.png */
-        .hero { 
-            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('bg.png') no-repeat center center; 
-            background-size: cover; 
-            height: 45vh; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            color: white; 
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.5); 
-        }
-
+        .hero { background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('bg.png') no-repeat center center; background-size: cover; height: 45vh; display: flex; align-items: center; justify-content: center; color: white; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
         .container { padding: 20px; max-width: 500px; margin: auto; }
-
-        /* 1. 客人名及報到數字區 */
         .guest-section { background: white; padding: 35px 20px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-top: -50px; position: relative; z-index: 10; }
         .guest-name { font-size: 26px; color: #b08d57; margin-bottom: 5px; font-weight: bold; }
         .check-in-label { font-size: 13px; letter-spacing: 2px; color: #999; text-transform: uppercase; margin-top: 15px; font-weight: bold; }
         .check-in-code { font-size: 65px; font-weight: bold; color: #d63384; margin: 0; font-family: 'Arial', sans-serif; }
-
-        /* 📸 相片互動區 */
         .photo-section { background: #fff; padding: 20px; border-radius: 20px; margin: 25px 0; border: 1px solid #f8d7da; }
         .section-sub-title { font-size: 18px; font-weight: bold; color: #d63384; margin-bottom: 15px; }
         .step-box { background: #fffafa; padding: 15px; border-radius: 15px; margin-bottom: 15px; border: 1px solid #ffebee; }
         .mega-frame { border: none; width: 100%; max-width: 300px; height: 70px; margin: auto; display: block; }
         .view-album-btn { display: inline-block; padding: 12px 25px; background: #d63384; color: white; text-decoration: none; border-radius: 25px; font-size: 15px; font-weight: bold; margin-top: 10px; }
-
-        /* 中間圖片 ec.png */
         .mid-img { width: 100%; border-radius: 12px; margin: 20px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-
-        /* 地點交通區 (使用你提供的 Google Map) */
         .section-title { color: #b08d57; border-bottom: 2px solid #f8d7da; display: inline-block; padding-bottom: 5px; margin: 40px 0 20px; font-size: 20px; font-weight: bold; }
-        .map-box { width: 100%; height: 350px; border-radius: 15px; margin-bottom: 15px; overflow: hidden; border: 1px solid #ddd; }
+        .map-box { width: 100%; height: 350px; border-radius: 15px; margin-bottom: 15px; overflow: hidden; border: 1px solid #ddd; position: relative; }
         .btn-nav { display: inline-block; padding: 10px 20px; background: #6c757d; color: white; text-decoration: none; border-radius: 20px; font-size: 14px; margin-bottom: 20px; }
-
-        /* 禮金區 (只保留 PayMe) */
         .payment-box { background: #fff; padding: 20px; border-radius: 20px; margin: 20px 0; border: 1px dashed #d63384; }
         .payme-grid { display: flex; justify-content: space-around; align-items: flex-start; margin-top: 15px; }
         .payme-item { width: 45%; }
         .qr-img { width: 100%; max-width: 150px; border: 1px solid #eee; padding: 5px; border-radius: 10px; }
         .pay-link { display: block; font-size: 12px; color: #d63384; text-decoration: none; font-weight: bold; margin-top: 5px; line-height: 1.2; }
-
         footer { padding: 50px 0; font-size: 13px; color: #bbb; }
     </style>
 </head>
@@ -77,9 +54,7 @@
             <div style="color: #f8d7da; margin: 10px 0;">✦ ✦ ✦</div>
             <div class="step-box" style="background: #fdfdfd;">
                 <p style="font-size: 14px; font-weight: bold; color: #4A4A4A; margin-bottom: 5px;">Step 2: 欣賞相簿 View Gallery</p>
-                <a href="https://mega.nz/folder/XmwQzIZB#hzQQ3A4LCXBGKOQxVjSfjA" target="_blank" class="view-album-btn">
-                    🖼️ 進入共享相簿 Open Album
-                </a>
+                <a href="https://mega.nz/folder/XmwQzIZB#hzQQ3A4LCXBGKOQxVjSfjA" target="_blank" class="view-album-btn">🖼️ 進入共享相簿 Open Album</a>
             </div>
         </div>
 
@@ -89,10 +64,13 @@
         <p><strong>合和酒店 19樓 水晶殿<br>Crystal Court @ 19F, Hopewell Hotel</strong><br>灣仔 15 Kennedy Rd, Wan Chai</p>
         
         <div class="map-box">
-            <iframe src="https://maps.app.goo.gl/你的GoogleMap短連結4" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m18!1m12!1m3!1d3691.956795413554!2d114.17066917614214!3d22.274008743977313!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3404005b53050a41%3A0xc3b53f65675e466a!2sHopewell%20Hotel!5e0!3m2!1szh-TW!2shk!4v1715456789012!5m2!1szh-TW!2shk" 
+                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
         </div>
         
-        <a href="https://maps.app.goo.gl/你的GoogleMap短連結5" target="_blank" class="btn-nav">📍 開啟 Google Maps 導航 (Navi)</a>
+        <a href="https://maps.app.goo.gl/3fR9fXf7sS6F4uA87" target="_blank" class="btn-nav">📍 開啟 Google Maps 導航 (Navi)</a>
 
         <div style="text-align: left; padding: 0 15px; font-size: 15px;">
             <p>🚇 <strong>港鐵 MTR：</strong> 灣仔站 B2 出口步行約 10 分鐘 (Wan Chai Station Exit B2)</p>
@@ -114,9 +92,7 @@
             </div>
         </div>
 
-        <footer>
-            Thank you for being part of our big day!
-        </footer>
+        <footer>Thank you for being part of our big day!</footer>
     </div>
 
     <script>
