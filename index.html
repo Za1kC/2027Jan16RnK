@@ -10,21 +10,11 @@
         /* 背景相片 bg.png */
         .hero { 
             background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('bg.png') no-repeat center center; 
-            background-size: cover; 
-            height: 45vh; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            color: white; 
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.5); 
-.pay-link { 
-            font-size: 24px !important;
-            color: #C5A059 !important;
-            font-weight: bold;
-            display: block;
-            margin-top: 12px;
-            text-decoration: none !important;
-        }
+            background-size: cover; height: 45vh; display: flex; align-items: center; 
+            justify-content: center; color: white; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); 
+
+	.pay-link { font-size: 24px !important;color: #C5A059 !important;
+            font-weight: bold; display: block; margin-top: 12px; text-decoration: none !important;}
 	backdrop-filter: blur(3px); /* 背景輕微模糊 */
     background-color: rgba(255, 255, 255, 0.1); /* 加一層 10% 透明度嘅白色 */
         }
@@ -52,6 +42,11 @@
 
 /* Location & Transport (英文) */
 	.section-title span.en-title { font-size: 20px; color: #999; font-weight: normal;display: block; }
+
+/* 地址區塊專用設定 */
+	.hotel-info { font-size: 20px;line-height: 1.6;margin: 20px 0;}
+	.hotel-info .hotel-name { font-size: 24px; color: #333; }
+	.hotel-info .address-text { color: #8E8E8E;}
 
         .map-box { width: 100%; height: 280px; border-radius: 15px; margin-bottom: 15px; overflow: hidden; border: 1px solid #ddd; }
         .btn-nav { display: inline-block; padding: 20px 30px; background: #6c757d; color: white; text-decoration: none; border-radius: 20px; font-size: 20px; margin-bottom: 20px; }
@@ -85,15 +80,15 @@
 
         <img src="ec.png" alt="Wedding Invitation" class="mid-img">
 
-	<h3 class="section-title">
+<h3 class="section-title">
 		<span class="zh-title">宴客地點及交通</span>
  		<span class="en-title">Location & Transport</span>
-	</h3>
-      		<p style="font-size: 20px; line-height: 1.6;">
-    			<strong>合和酒店 Hopewell Hotel </strong><br>
-    			<strong> 19樓 水晶殿 Crystal Court @19F </strong><br>
-    			 | 灣仔堅尼地道 15 號 | <br> 15 Kennedy Rd, Wan Chai
-		</p>
+</h3>
+	<div class="hotel-info">
+    		<strong class="hotel-name">合和酒店 Hopewell Hotel</strong><br>
+    		<strong>19樓 水晶殿 Crystal Court @19F</strong><br>
+    		<span class="address-text">| 灣仔堅尼地道 15 號 | <br> 15 Kennedy Rd, Wan Chai</span>
+	</div>
         
         <div class="map-box">
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3692.075619133127!2d114.16856837595348!3d22.275125179704784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34040142442cf219%3A0xf1d954082fbb9a28!2sHopewell%20Hotel!5e0!3m2!1sen!2shk!4v1777092230192!5m2!1sen!2shk" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
