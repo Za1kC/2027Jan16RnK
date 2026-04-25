@@ -21,32 +21,30 @@
 
         .container { padding: 20px; max-width: 500px; margin: auto; }
 
-        /* 1. 客人名及報到數字區 (中英對照版) */
+        /* 1. 客人名及報到數字區 */
         .guest-section { background: white; padding: 35px 20px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-top: -50px; position: relative; z-index: 10; }
         .guest-name { font-size: 26px; color: #b08d57; margin-bottom: 5px; font-weight: bold; }
-        .check-in-label { font-size: 13px; letter-spacing: 2px; color: #999; text-transform: uppercase; margin-top: 15px; font-weight: bold; }
+        .check-in-label { font-size: 13px; letter-spacing: 3px; color: #999; text-transform: uppercase; margin-top: 15px; }
         .check-in-code { font-size: 65px; font-weight: bold; color: #d63384; margin: 0; font-family: 'Arial', sans-serif; }
 
-        /* 雲端連結按鈕 */
-        .btn-upload { display: block; padding: 16px; background: #d63384; color: white; text-decoration: none; border-radius: 30px; margin: 25px 0; font-weight: bold; box-shadow: 0 4px 10px rgba(214, 51, 132, 0.3); }
+        /* 按鈕樣式 (雲端連結) */
+        .btn-upload { display: block; padding: 16px; background: #d63384; color: white; text-decoration: none; border-radius: 30px; margin: 25px 0; font-weight: bold; box-shadow: 0 4px 10px rgba(214, 51, 132, 0.3); animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
 
         /* 2. 中間圖片 ec.png */
         .mid-img { width: 100%; border-radius: 12px; margin: 20px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
 
-        /* 3. 地點交通區 (合和酒店) */
-        .section-title { color: #b08d57; border-bottom: 2px solid #f8d7da; display: inline-block; padding-bottom: 5px; margin: 40px 0 20px; font-size: 20px; font-weight: bold; }
+        /* 3. 地點交通區 */
+        .section-title { color: #b08d57; border-bottom: 2px solid #f8d7da; display: inline-block; padding-bottom: 5px; margin: 40px 0 20px; font-size: 20px; }
         .map-box { width: 100%; height: 280px; border-radius: 15px; margin-bottom: 15px; overflow: hidden; border: 1px solid #ddd; }
         .btn-nav { display: inline-block; padding: 10px 20px; background: #6c757d; color: white; text-decoration: none; border-radius: 20px; font-size: 14px; margin-bottom: 20px; }
 
-        /* 4. PayMe 雙欄排版 */
-        .payment-box { background: #fff; padding: 20px; border-radius: 20px; margin: 20px 0; border: 1px dashed #d63384; }
-        .payme-grid { display: flex; justify-content: space-around; align-items: flex-start; margin-top: 15px; }
-        .payme-item { width: 45%; }
-        .qr-img { width: 100%; max-width: 150px; border: 1px solid #eee; padding: 5px; border-radius: 10px; }
-        .pay-link { display: block; font-size: 12px; color: #d63384; text-decoration: none; font-weight: bold; margin-top: 5px; line-height: 1.2; }
-        .fps-info { background: #fff0f5; padding: 15px; border-radius: 10px; font-size: 18px; font-weight: bold; color: #d63384; border: 1px solid #f8d7da; margin-top: 20px; }
+        /* 4. PayMe & FPS 區 */
+        .payment-box { background: #fff; padding: 25px 20px; border-radius: 20px; margin: 20px 0; border: 1px dashed #d63384; }
+        .qr-img { width: 85%; max-width: 220px; margin: 15px 0; border: 1px solid #eee; padding: 5px; }
+        .fps-info { background: #fff0f5; padding: 15px; border-radius: 10px; font-size: 20px; font-weight: bold; color: #d63384; border: 1px solid #f8d7da; }
 
-        footer { padding: 50px 0; font-size: 13px; color: #bbb; }
+        footer { padding: 50px 0; font-size: 13px; color: #bbb; letter-spacing: 1px; }
     </style>
 </head>
 <body>
@@ -59,62 +57,59 @@
         
         <div class="guest-section">
             <div id="guestName" class="guest-name">親愛的賓客</div>
-            <p style="margin: 0; color: #666;">誠邀出席我們的婚禮 Welcome to our wedding</p>
-            <div class="check-in-label">專屬報到編號 Your number</div>
+            <p style="margin: 0; color: #666;">誠邀出席我們的婚禮</p>
+            <div class="check-in-label">專屬報到編號</div>
             <div id="checkInID" class="check-in-code">---</div>
-            <p style="font-size: 13px; color: #b08d57;">(請喺接待處出示此代碼報到 Please show in reception)</p>
+            <p style="font-size: 13px; color: #b08d57;">(請向現場工作人員出示此代碼報到)</p>
         </div>
 
         <a href="https://mega.nz/folder/y6gDnbxT#KdSiFHFRcg6auJ4w_C8FTw" target="_blank" class="btn-upload">
-            📸 點此上載及分享當日相片<br>Click to upload photos taken
+            📸 點此上載及分享當日相片
         </a>
 
         <img src="ec.png" alt="Wedding Invitation" class="mid-img">
 
-        <h3 class="section-title">宴客地點及交通 Location & Transport</h3>
-        <p><strong>合和酒店 19樓 水晶殿<br>Crystal Court @ 19F, Hopewell Hotel</strong><br>灣仔 15 Kennedy Rd, Wan Chai</p>
+        <h3 class="section-title">宴客地點及交通</h3>
+        <p><strong>[在此輸入酒店或地點名稱]</strong><br>香港[在此輸入詳細地址]</p>
         
         <div class="map-box">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m18!1m12!1m18!1m12!1m3!1d3691.954604473852!2d114.1706692759553!3d22.275916043323062!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3404005cf39f408f%3A0xc3f8e56272584e03!2s15%20Kennedy%20Rd%2C%20Wan%20Chai!5e0!3m2!1sen!2shk!4v1700000000000!5m2!1sen!2shk" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.75!2d114.17!3d22.3!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjLCsDE4JzAwLjAiTiAxMTTCsDEwJzAwLjAiRQ!5e0!3m2!1zhant-HK!2shk!4v123456789" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         </div>
         
-        <a href="https://maps.app.goo.gl/9yX3xP6F1B8n6pP19" target="_blank" class="btn-nav">📍 開啟 Google Maps 導航 (Navi)</a>
+        <a href="https://maps.google.com" target="_blank" class="btn-nav">📍 開啟 Google Maps 導航</a>
 
         <div style="text-align: left; padding: 0 15px; font-size: 15px;">
-            <p>🚇 <strong>港鐵 MTR：</strong> 灣仔站 B2 出口步行約 10 分鐘 (Wan Chai Station Exit B2)</p>
-            <p>🚌 <strong>交通建議：</strong> 合和中心設有升降機連接皇后大道東及堅尼地道 (Access via Hopewell Centre lifts)</p>
+            <p>🚇 <strong>港鐵：</strong> [例如：尖沙咀站 L6 出口]</p>
+            <p>🚌 <strong>巴士：</strong> [例如：乘搭 1, 1A, 2, 6 號線直達]</p>
         </div>
 
-        <h3 class="section-title">分享喜悅 Blessing</h3>
+        <h3 class="section-title">分享喜悅 (禮金)</h3>
         <div class="payment-box">
-            <p style="margin-bottom: 10px; font-weight: bold;">PayMe 掃描付款 (Scan to Pay)</p>
-            <div class="payme-grid">
-                <div class="payme-item">
-                    <img src="kpm.jpg" alt="PayMe kpm" class="qr-img">
-                    <a href="https://payme.hsbc/kazc" class="pay-link">點擊開啟 (kazc)</a>
-                </div>
-                <div class="payme-item">
-                    <img src="rpm.jpg" alt="PayMe rpm" class="qr-img">
-                    <a href="https://payme.hsbc/ricoc" class="pay-link">點擊開啟 (ricoc)</a>
-                </div>
-            </div>
-            
-            <p style="margin-top: 30px; margin-bottom: 5px; font-weight: bold;">轉數快 (FPS)</p>
+            <p style="margin-bottom: 5px; font-weight: bold;">PayMe 掃描付款</p>
+            <img src="kpm.jpg" alt="PayMe QR" class="qr-img">
+            <br>
+            <p style="margin-top: 20px; margin-bottom: 5px; font-weight: bold;">轉數快 (FPS)</p>
             <div class="fps-info">FPS ID: [在此輸入號碼]</div>
-            <p style="font-size: 14px; margin-top: 5px;">戶口姓名 Name: [在此輸入姓名]</p>
+            <p style="font-size: 14px; margin-top: 5px;">戶口姓名：[在此輸入姓名]</p>
         </div>
 
         <footer>
-            Thank you for being part of our big day!
+            Created with Love | 2026
         </footer>
     </div>
 
     <script>
+        // 自動解析網址參數
         const urlParams = new URLSearchParams(window.location.search);
         const nameParam = urlParams.get('name');
         const idParam = urlParams.get('id');
-        if (nameParam) document.getElementById('guestName').innerText = "親愛的 " + nameParam;
-        if (idParam) document.getElementById('checkInID').innerText = idParam;
+
+        if (nameParam) {
+            document.getElementById('guestName').innerText = "親愛的 " + nameParam;
+        }
+        if (idParam) {
+            document.getElementById('checkInID').innerText = idParam;
+        }
     </script>
 
 </body>
