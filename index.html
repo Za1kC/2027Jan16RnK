@@ -27,28 +27,27 @@
         .check-in-label { font-size: 13px; letter-spacing: 2px; color: #999; text-transform: uppercase; margin-top: 15px; font-weight: bold; }
         .check-in-code { font-size: 65px; font-weight: bold; color: #d63384; margin: 0; font-family: 'Arial', sans-serif; }
 
-        /* 📸 相片互動區：上載與瀏覽分流 */
+        /* 📸 相片互動區 */
         .photo-section { background: #fff; padding: 20px; border-radius: 20px; margin: 25px 0; border: 1px solid #f8d7da; }
         .section-sub-title { font-size: 18px; font-weight: bold; color: #d63384; margin-bottom: 15px; }
         .step-box { background: #fffafa; padding: 15px; border-radius: 15px; margin-bottom: 15px; border: 1px solid #ffebee; }
         .mega-frame { border: none; width: 100%; max-width: 300px; height: 70px; margin: auto; display: block; }
-        .view-album-btn { display: inline-block; padding: 12px 25px; background: #d63384; color: white; text-decoration: none; border-radius: 25px; font-size: 15px; font-weight: bold; margin-top: 10px; box-shadow: 0 4px 10px rgba(214, 51, 132, 0.2); }
+        .view-album-btn { display: inline-block; padding: 12px 25px; background: #d63384; color: white; text-decoration: none; border-radius: 25px; font-size: 15px; font-weight: bold; margin-top: 10px; }
 
         /* 中間圖片 ec.png */
         .mid-img { width: 100%; border-radius: 12px; margin: 20px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
 
-        /* 地點交通區 */
+        /* 地點交通區 (使用你提供的 Google Map) */
         .section-title { color: #b08d57; border-bottom: 2px solid #f8d7da; display: inline-block; padding-bottom: 5px; margin: 40px 0 20px; font-size: 20px; font-weight: bold; }
-        .map-box { width: 100%; height: 280px; border-radius: 15px; margin-bottom: 15px; overflow: hidden; border: 1px solid #ddd; }
+        .map-box { width: 100%; height: 350px; border-radius: 15px; margin-bottom: 15px; overflow: hidden; border: 1px solid #ddd; }
         .btn-nav { display: inline-block; padding: 10px 20px; background: #6c757d; color: white; text-decoration: none; border-radius: 20px; font-size: 14px; margin-bottom: 20px; }
 
-        /* 禮金區 */
+        /* 禮金區 (只保留 PayMe) */
         .payment-box { background: #fff; padding: 20px; border-radius: 20px; margin: 20px 0; border: 1px dashed #d63384; }
         .payme-grid { display: flex; justify-content: space-around; align-items: flex-start; margin-top: 15px; }
         .payme-item { width: 45%; }
         .qr-img { width: 100%; max-width: 150px; border: 1px solid #eee; padding: 5px; border-radius: 10px; }
         .pay-link { display: block; font-size: 12px; color: #d63384; text-decoration: none; font-weight: bold; margin-top: 5px; line-height: 1.2; }
-        .fps-info { background: #fff0f5; padding: 15px; border-radius: 10px; font-size: 18px; font-weight: bold; color: #d63384; border: 1px solid #f8d7da; margin-top: 20px; }
 
         footer { padding: 50px 0; font-size: 13px; color: #bbb; }
     </style>
@@ -71,17 +70,13 @@
 
         <div class="photo-section">
             <div class="section-sub-title">📸 共享當日回憶 Share Memories</div>
-            
             <div class="step-box">
                 <p style="font-size: 14px; font-weight: bold; color: #4A4A4A; margin-bottom: 10px;">Step 1: 上載相片 Upload Photos</p>
                 <iframe class="mega-frame" frameborder="0" src="https://mega.nz/filerequest#!DIgRJb1GpTw!l!en"></iframe>
             </div>
-
             <div style="color: #f8d7da; margin: 10px 0;">✦ ✦ ✦</div>
-
             <div class="step-box" style="background: #fdfdfd;">
                 <p style="font-size: 14px; font-weight: bold; color: #4A4A4A; margin-bottom: 5px;">Step 2: 欣賞相簿 View Gallery</p>
-                <p style="font-size: 12px; color: #888; margin-bottom: 10px;">(上載後可點擊下方按鈕欣賞全體相片)</p>
                 <a href="https://mega.nz/folder/XmwQzIZB#hzQQ3A4LCXBGKOQxVjSfjA" target="_blank" class="view-album-btn">
                     🖼️ 進入共享相簿 Open Album
                 </a>
@@ -94,10 +89,10 @@
         <p><strong>合和酒店 19樓 水晶殿<br>Crystal Court @ 19F, Hopewell Hotel</strong><br>灣仔 15 Kennedy Rd, Wan Chai</p>
         
         <div class="map-box">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m12!1m3!1d3691.9567995874276!2d114.17066927602058!3d22.274191043977317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x340400693a10069d%3A0xe67865f128d5338!2sHopewell%20Hotel!5e0!3m2!1szh-TW!2shk!4v1714000000000!5m2!1szh-TW!2shk" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            <iframe src="https://maps.app.goo.gl/你的GoogleMap短連結4" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
         
-        <a href="https://maps.app.goo.gl/6m6v6nK4A2C5R6D7" target="_blank" class="btn-nav">📍 開啟 Google Maps 導航 (Navi)</a>
+        <a href="https://maps.app.goo.gl/你的GoogleMap短連結5" target="_blank" class="btn-nav">📍 開啟 Google Maps 導航 (Navi)</a>
 
         <div style="text-align: left; padding: 0 15px; font-size: 15px;">
             <p>🚇 <strong>港鐵 MTR：</strong> 灣仔站 B2 出口步行約 10 分鐘 (Wan Chai Station Exit B2)</p>
@@ -117,10 +112,6 @@
                     <a href="https://payme.hsbc/ricoc" class="pay-link">點擊開啟 (ricoc)</a>
                 </div>
             </div>
-            
-            <p style="margin-top: 30px; margin-bottom: 5px; font-weight: bold;">轉數快 (FPS)</p>
-            <div class="fps-info">FPS ID: [在此輸入號碼]</div>
-            <p style="font-size: 14px; margin-top: 5px;">戶口姓名 Name: [在此輸入姓名]</p>
         </div>
 
         <footer>
