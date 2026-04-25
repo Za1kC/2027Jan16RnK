@@ -19,13 +19,13 @@
             text-shadow: 2px 2px 10px rgba(0,0,0,0.5); 
         }
 
-        .container { padding: 20px; max-width: 500px; margin: auto; }
+        .container { padding: 30px; max-width: 600px; margin: auto; }
 
         /* 1. 客人名及報到數字區 */
         .guest-section { background: white; padding: 35px 20px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-top: -50px; position: relative; z-index: 10; }
-        .guest-name { font-size: 30px; color: #b08d57; margin-bottom: 5px; font-weight: bold; }
-        .check-in-label { font-size: 13px; letter-spacing: 3px; color: #999; text-transform: uppercase; margin-top: 15px; }
-        .check-in-code { font-size: 80px; font-weight: bold; color: #d63384; margin: 0; font-family: 'Arial', sans-serif; }
+        .guest-name { font-size: 40px; color: #b08d57; margin-bottom: 5px; font-weight: bold; }
+        .check-in-label { font-size: 20px; letter-spacing: 5px; color: #999; text-transform: uppercase; margin-top: 15px; }
+        .check-in-code { font-size: 100px; font-weight: bold; color: #d63384; margin: 0; font-family: 'Arial', sans-serif; }
 
         /* 按鈕樣式 (雲端連結) */
         .btn-upload { display: block; padding: 16px; background: #d63384; color: white; text-decoration: none; border-radius: 30px; margin: 25px 0; font-weight: bold; box-shadow: 0 4px 10px rgba(214, 51, 132, 0.3); animation: pulse 2s infinite; }
@@ -39,7 +39,7 @@
         .map-box { width: 100%; height: 280px; border-radius: 15px; margin-bottom: 15px; overflow: hidden; border: 1px solid #ddd; }
         .btn-nav { display: inline-block; padding: 20px 30px; background: #6c757d; color: white; text-decoration: none; border-radius: 20px; font-size: 20px; margin-bottom: 25px; }
 
-        /* 4. PayMe & FPS 區 */
+        /* 4. PayMe 區 */
         .payment-box { background: #fff; padding: 25px 20px; border-radius: 20px; margin: 20px 0; border: 1px dashed #d63384; }
         .qr-img { width: 85%; max-width: 220px; margin: 15px 0; border: 1px solid #eee; padding: 5px; }
         .fps-info { background: #fff0f5; padding: 15px; border-radius: 10px; font-size: 20px; font-weight: bold; color: #d63384; border: 1px solid #f8d7da; }
@@ -60,7 +60,7 @@
             <p style="margin: 0; color: #666;">誠邀出席我們的婚禮 Welcome to our wedding</p>
             <div class="check-in-label">專屬報到編號 Your number</div>
             <div id="checkInID" class="check-in-code">---</div>
-            <p style="font-size: 13px; color: #b08d57;">(請喺接待處出示此代碼報到 Please show in reception)</p>
+            <p style="font-size: 15px; color: #b08d57;">(請喺接待處出示此代碼報到 Please show in reception)</p>
         </div>
 
         <a href="https://mega.nz/folder/y6gDnbxT#KdSiFHFRcg6auJ4w_C8FTw" target="_blank" class="btn-upload">
@@ -69,7 +69,7 @@
 
         <img src="ec.png" alt="Wedding Invitation" class="mid-img">
 
-	<h3 class="section-title">宴客地點及交通 Location & Transport</h3>
+	<h3 class="section-title">宴客地點及交通 <br> Location & Transport</h3>
         <p><strong>合和酒店 19樓 水晶殿<br>Crystal Court @ 19F, Hopewell Hotel</strong><br>灣仔 15 Kennedy Rd, Wan Chai</p>
         
         <div class="map-box">
@@ -85,17 +85,22 @@
 
 	<h3 class="section-title">分享喜悅 Blessing</h3>
        <div class="payment-box">
-            <p style="margin-bottom: 15px; font-weight: bold;">PayMe 掃描付款</p>
+            <p style="margin-bottom: 15px; font-weight: bold; font-size: 20px;">PayMe 掃描/點擊付款<br><span style="font-size: 16px; font-weight: normal; color: #666;">Scan or Click to Pay</span></p>
             <div class="payme-grid">
                 <div class="payme-item">
-                    <img src="kpm.jpg" alt="PayMe kpm" class="qr-img">
-                    <a href="https://payme.hsbc/kazc" class="pay-link">點擊開啟 PayMe (kazc)</a>
+                    <a href="https://payme.hsbc/kazc" class="pay-link-wrapper" target="_blank">
+                        <img src="kpm.jpg" alt="PayMe kpm" class="qr-img">
+                        <span class="pay-link">點擊開啟 (kazc)</span>
+                    </a>
                 </div>
                 <div class="payme-item">
-                    <img src="rpm.jpg" alt="PayMe rpm" class="qr-img">
-                    <a href="https://payme.hsbc/ricoc" class="pay-link">點擊開啟 PayMe (ricoc)</a>
+                    <a href="https://payme.hsbc/ricoc" class="pay-link-wrapper" target="_blank">
+                        <img src="rpm.jpg" alt="PayMe rpm" class="qr-img">
+                        <span class="pay-link">點擊開啟 (ricoc)</span>
+                    </a>
                 </div>
             </div>
+        </div>
 
         <footer>Thank you for being part of our big day!</footer>
     </div>
