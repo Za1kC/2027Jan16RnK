@@ -7,7 +7,6 @@
     <style>
         body { font-family: 'PingFang HK', 'Microsoft JhengHei', sans-serif; text-align: center; color: #4A4A4A; background: #fff5f5; margin: 0; padding: 0; line-height: 1.6; }
         
-        /* 背景相片 bg.png */
         .hero { 
             background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('bg.png') no-repeat center center; 
             background-size: cover; 
@@ -21,24 +20,23 @@
 
         .container { padding: 20px; max-width: 500px; margin: auto; }
 
-        /* 1. 客人名及報到數字區 (中英對照版) */
         .guest-section { background: white; padding: 35px 20px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-top: -50px; position: relative; z-index: 10; }
         .guest-name { font-size: 26px; color: #b08d57; margin-bottom: 5px; font-weight: bold; }
         .check-in-label { font-size: 13px; letter-spacing: 2px; color: #999; text-transform: uppercase; margin-top: 15px; font-weight: bold; }
         .check-in-code { font-size: 65px; font-weight: bold; color: #d63384; margin: 0; font-family: 'Arial', sans-serif; }
 
-        /* 雲端連結按鈕 */
-        .btn-upload { display: block; padding: 16px; background: #d63384; color: white; text-decoration: none; border-radius: 30px; margin: 25px 0; font-weight: bold; box-shadow: 0 4px 10px rgba(214, 51, 132, 0.3); }
+        /* 上載區樣式 */
+        .upload-section { background: #fff; padding: 20px; border-radius: 20px; margin: 25px 0; border: 1px solid #f8d7da; }
+        .upload-title { font-size: 16px; font-weight: bold; color: #d63384; margin-bottom: 10px; }
+        .mega-frame { border: none; width: 100%; max-width: 300px; height: 70px; margin: auto; display: block; }
+        .direct-link { display: block; font-size: 12px; color: #999; text-decoration: underline; margin-top: 10px; }
 
-        /* 2. 中間圖片 ec.png */
         .mid-img { width: 100%; border-radius: 12px; margin: 20px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
 
-        /* 3. 地點交通區 (合和酒店) */
         .section-title { color: #b08d57; border-bottom: 2px solid #f8d7da; display: inline-block; padding-bottom: 5px; margin: 40px 0 20px; font-size: 20px; font-weight: bold; }
         .map-box { width: 100%; height: 280px; border-radius: 15px; margin-bottom: 15px; overflow: hidden; border: 1px solid #ddd; }
         .btn-nav { display: inline-block; padding: 10px 20px; background: #6c757d; color: white; text-decoration: none; border-radius: 20px; font-size: 14px; margin-bottom: 20px; }
 
-        /* 4. PayMe 雙欄排版 */
         .payment-box { background: #fff; padding: 20px; border-radius: 20px; margin: 20px 0; border: 1px dashed #d63384; }
         .payme-grid { display: flex; justify-content: space-around; align-items: flex-start; margin-top: 15px; }
         .payme-item { width: 45%; }
@@ -65,11 +63,11 @@
             <p style="font-size: 13px; color: #b08d57;">(請喺接待處出示此代碼報到 Please show in reception)</p>
         </div>
 
-
-
-        <a href="https://mega.nz/filerequest/DIgRJb1GpTw" target="_blank" class="btn-upload">
-            📸 點此上載及分享當日相片<br>Click to upload photos taken
-        </a>
+        <div class="upload-section">
+            <div class="upload-title">📸 點此上載及分享當日相片<br>Upload photos taken today</div>
+            <iframe class="mega-frame" frameborder="0" src="https://mega.nz/filerequest#!DIgRJb1GpTw!l!en"></iframe>
+            <a href="https://mega.nz/filerequest/DIgRJb1GpTw" target="_blank" class="direct-link">打不開？點此手動上載 (Open in new window)</a>
+        </div>
 
         <img src="ec.png" alt="Wedding Invitation" class="mid-img">
 
@@ -77,13 +75,13 @@
         <p><strong>合和酒店 19樓 水晶殿<br>Crystal Court @ 19F, Hopewell Hotel</strong><br>灣仔 15 Kennedy Rd, Wan Chai</p>
         
         <div class="map-box">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m18!1m12!1m18!1m12!1m3!1d3691.954604473852!2d114.1706692759553!3d22.275916043323062!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3404005cf39f408f%3A0xc3f8e56272584e03!2s15%20Kennedy%20Rd%2C%20Wan%20Chai!5e0!3m2!1sen!2shk!4v1700000000000!5m2!1sen!2shk" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m13!1d3691.896623610991!2d114.17042537604558!3d22.274313543916962!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34040043542289c5%3A0x6b772097e937d57!2sHopewell%20Hotel!5e0!3m2!1szh-TW!2shk!4v1710000000000" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         </div>
         
-        <a href="https://maps.app.goo.gl/9yX3xP6F1B8n6pP19" target="_blank" class="btn-nav">📍 開啟 Google Maps 導航 (Navi)</a>
+        <a href="https://maps.app.goo.gl/9uE8Z7jLhE6W8a4i9" target="_blank" class="btn-nav">📍 開啟 Google Maps 導航 (Navi)</a>
 
         <div style="text-align: left; padding: 0 15px; font-size: 15px;">
-            <p>🚇 <strong>港鐵 MTR：</strong> 灣仔站 B2 出口步行約 10 分鐘 (Wan Chai Station Exit B2 Walk around 10 mins)</p>
+            <p>🚇 <strong>港鐵 MTR：</strong> 灣仔站 B2 出口步行約 10 分鐘 (Wan Chai Station Exit B2)</p>
             <p>🚌 <strong>交通建議：</strong> 合和中心設有升降機連接皇后大道東及堅尼地道 (Access via Hopewell Centre lifts)</p>
         </div>
 
