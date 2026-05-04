@@ -74,7 +74,7 @@
             <p style="font-size: 20px; color: #b08d57;">請喺接待處出示此代碼報到 <br> Please show in reception</p>
         </div>
 
-        <a href="https://mega.nz/folder/y6gDnbxT#KdSiFHFRcg6auJ4w_C8FTw" target="_blank" class="btn-upload">
+        <a href="https://mega.nz/filerequest/ud5oF16Lq8I" target="_blank" class="btn-upload">
             📸 點此上載及分享當日相片 <br> Click to share photos taken
         </a>
 
@@ -123,19 +123,6 @@
         <footer>Thank you for being part of our big day!</footer>
     </div>
 
-    <script>
-        // 自動解析網址參數
-        const urlParams = new URLSearchParams(window.location.search);
-        const nameParam = urlParams.get('name');
-        const idParam = urlParams.get('id');
-
-        if (nameParam) {
-            document.getElementById('guestName').innerText = "親愛的 " + nameParam;
-        }
-        if (idParam) {
-            document.getElementById('checkInID').innerText = idParam;
-        }
-    </script>
 
 <div id="popup" style="
   display:none;
@@ -161,6 +148,19 @@
   <button onclick="document.getElementById('popup').style.display='none'">關閉 / Close</button>
 </div>
 
+    <script>
+        // 自動解析網址參數
+        const urlParams = new URLSearchParams(window.location.search);
+        const nameParam = urlParams.get('name');
+        const idParam = urlParams.get('id');
+
+        if (nameParam) {
+            document.getElementById('guestName').innerText = "親愛的 " + nameParam;
+        }
+        if (idParam) {
+            document.getElementById('checkInID').innerText = idParam;
+        }
+    </script>
 
 </body>
 </html>
