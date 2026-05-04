@@ -137,5 +137,32 @@
         }
     </script>
 
+  <!-- Pop-up Box -->
+  <div id="popup" style="display:none; ...">
+    <p>
+      記得早啲嚟，我地5點恭候，<br>
+      唔少遊戲同打卡等住你嗖玩同欣賞ga~<br><br>
+      Remember to come early!<br>
+      We’ll be waiting at 5 PM,<br>
+      with fun games and photo spots for you to enjoy!
+    </p>
+    <button onclick="document.getElementById('popup').style.display='none'">關閉 / Close</button>
+  </div>
+
+  <script>
+    const deadline = new Date("2027-01-16T00:00:00");
+    const now = new Date();
+
+    if (now < deadline) {
+	// 15秒後彈出
+      	setTimeout(() => {document.getElementById("popup").style.display = "block";}, 15000);
+
+      	// 拉到最底時彈出
+      	window.addEventListener("scroll", () => {
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+          document.getElementById("popup").style.display = "block";}});
+    }
+  </script>
+
 </body>
 </html>
