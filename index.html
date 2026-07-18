@@ -3,149 +3,288 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Wedding Invitation</title>
+    <title>Wedding Invitation | 誠摯邀請您</title>
     <style>
-        body { font-family: 'Comic Sans MS', 'Chalkboard SE','Hiragino Maru Gothic ProN', 'PingFang HK', 'Yu Gothic', 'Rounded Mplus 1c', sans-serif; text-align: center; color: #4A4A4A; background: #fff5f5; margin: 0; padding: 0; line-height: 1.6; }
-        
-        /* 背景相片 bg.png - 已修正 CSS 語法 */
-        .hero { 
-            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('bg.png') no-repeat center center; 
-            background-size: cover; height: 45vh; display: flex; align-items: center; 
-            justify-content: center; color: white; text-shadow: 2px 2px 10px rgba(0,0,0,0.5);  
-            backdrop-filter: blur(3px);
-            background-color: rgba(255, 255, 255, 0.1);
+        /* 浪漫婚禮粉色系風格 */
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; 
+            background: #fff5f7; 
+            color: #4a4a4a; 
+            margin: 0; 
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
         }
 
-        .pay-link { font-size: 24px !important; color: #C5A059 !important; font-weight: bold; display: block; margin-top: 12px; text-decoration: none !important;}
-        .container { padding: 30px; max-width: 600px; margin: auto; }
+        /* 喜帖主卡片 */
+        .invitation-card {
+            background: white;
+            width: 85%;
+            max-width: 450px;
+            padding: 40px 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(214, 51, 132, 0.08);
+            text-align: center;
+            border: 1px solid #fde2e4;
+        }
 
-        /* 1. 客人名及報到數字區 */
-        .guest-section { background: white; padding: 35px 20px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-top: -50px; position: relative; z-index: 10; }
-        .guest-name { font-size: 40px; color: #b08d57; margin-bottom: 5px; font-weight: bold; }
-        .check-in-label { font-size: 20px; letter-spacing: 5px; color: #999; text-transform: uppercase; margin-top: 15px; }
-        .check-in-code { font-size: 100px; font-weight: bold; color: #d63384; margin: 0; font-family: 'Arial', sans-serif; }
+        .heart-icon {
+            color: #d63384;
+            font-size: 35px;
+            margin-bottom: 10px;
+        }
 
-        /* 按鈕樣式 (雲端連結) */
-        .btn-upload { width: 85%; max-width: 320px; border-radius: 15px; display: block; padding: 12px 24px; background-color: #f8d7da; color: #721c24; font-size: 20px; margin: 30px auto; font-weight: bold; text-decoration: none; box-shadow: 0 4px 10px rgba(214, 51, 132, 0.3); animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { transform: scale(0.96); } 50% { transform: scale(1.02); } 100% { transform: scale(0.96); } }
+        h1 {
+            font-size: 28px;
+            color: #d63384;
+            margin: 10px 0;
+            font-family: "Georgia", serif;
+        }
 
-        /* 2. 中間圖片 ec.png */
-        .mid-img { width: 95%; max-width: 550px; border-radius: 12px; margin: 25px auto 50px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .names {
+            font-size: 22px;
+            font-weight: bold;
+            color: #495057;
+            margin: 15px 0;
+        }
 
-        /* 3. 地點交通區 */
-        .section-title { color: #b08d57; border-bottom: 2px solid #f8d7da; display: block; padding-bottom: 8px; margin: 45px 0 15px; font-size: 30px; line-height: 1.4; text-align: center;}
-        .section-title span.zh-title { font-size: 30px; display: block;}
-        .section-title span.en-title { font-size: 25px; color: #999; font-weight: normal; display: block; }
+        .details {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #6c757d;
+            margin: 25px 0;
+        }
 
-        /* 地址區塊專用設定 */
-        .hotel-info { font-size: 20px; line-height: 1.6; margin: 20px 0;}
-        .hotel-info .hotel-name-row { font-size: 24px; color: #333; display: block; }
-        .address-text { line-height: 1.6; color: #8E8E8E;}
+        /* 呼叫彈窗的大按鈕 */
+        .btn-show-popup {
+            background: #d63384;
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(214, 51, 132, 0.3);
+            transition: all 0.2s;
+        }
 
-        .map-box { width: 100%; height: 280px; border-radius: 15px; margin-bottom: 15px; overflow: hidden; border: 1px solid #ddd; }
-        .btn-nav { display: inline-block; padding: 20px 30px; background: #6c757d; color: white; text-decoration: none; border-radius: 20px; font-size: 20px; margin-bottom: 20px; }
+        .btn-show-popup:hover {
+            background: #b8236c;
+            transform: translateY(-2px);
+        }
 
-        /* 4. PayMe 區 */
-        .payment-box { background: #fff; padding: 25px 20px; border-radius: 20px; margin: 20px 0; border: 1px dashed #d63384; }
-        .qr-img { width: 90%; max-width: 300px; margin: 15px 0; border: 1px solid #eee; padding: 5px; }
-        .payme-grid { display: flex; justify-content: space-around; flex-wrap: wrap; }
-        .payme-item { margin: 10px; }
-      
-        footer { padding: 50px 0; font-size: 13px; color: #bbb; letter-spacing: 1px; }
+        /* ========================================== */
+        /* ✨ 核心修改：加大版 Pop-up 彈出視窗樣式 ✨ */
+        /* ========================================== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6); /* 更加深背景，突出彈窗 */
+            backdrop-filter: blur(5px);    /* 背景模糊特效，極具高級感 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        /* 當啟動時顯示彈窗 */
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* 加大版的對話框本體 */
+        .modal-box {
+            background: white;
+            width: 88%;              /* 適合手機屏幕，兩邊留少許奢華邊距 */
+            max-width: 580px;        /* 💥 電腦版最大寬度顯著加大（原版通常只有350px） */
+            padding: 45px 35px;      /* 💥 內邊距大幅加寬，讓排版大氣不擁擠 */
+            border-radius: 24px;     /* 更圓潤優雅的圓角 */
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            text-align: center;
+            box-sizing: border-box;
+            border: 3px solid #fde2e4; /* 淡淡的粉紅邊框襯托 */
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-box {
+            transform: scale(1);
+        }
+
+        /* 彈窗內的大標題 */
+        .modal-box h3 {
+            margin-top: 0;
+            color: #d63384;
+            font-size: 28px;         /* 💥 標題加大 */
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        /* 歡迎賓客的大字 */
+        .guest-welcome {
+            font-size: 24px;         /* 💥 賓客名字超大字體 */
+            color: #212529;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+
+        /* 報到序號的外框與超大數字 */
+        .no-badge-container {
+            background: #fff0f3;
+            border: 2px dashed #d63384;
+            border-radius: 16px;
+            padding: 25px 20px;
+            margin: 30px 0;
+        }
+
+        .no-label {
+            font-size: 16px;
+            color: #d63384;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .no-number {
+            font-size: 56px;         /* 💥 報到編號超級放大！方便接待處一眼看清 */
+            font-weight: 900;
+            color: #b8236c;
+            font-family: 'Courier New', Courier, monospace; /* 數字等寬更易讀 */
+            letter-spacing: 2px;
+        }
+
+        .modal-hint {
+            font-size: 16px;         /* 💥 提示文字加大 */
+            color: #6c757d;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        /* 彈窗內的大按鈕 */
+        .btn-close {
+            background: #495057;
+            color: white;
+            border: none;
+            padding: 16px 45px;      /* 💥 按鈕變大，方便手指點擊 */
+            font-size: 18px;         /* 💥 按鈕字體加大 */
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background 0.2s;
+            width: 100%;             /* 手機版直排大按鈕 */
+            max-width: 250px;
+        }
+
+        .btn-close:hover {
+            background: #212529;
+        }
     </style>
 </head>
 <body>
 
-    <div class="hero">
-        <h1>Wedding Celebration</h1>
+    <!-- 喜帖主卡片內容 -->
+    <div class="invitation-card">
+        <div class="heart-icon">♥</div>
+        <h1>Wedding Invitation</h1>
+        <div class="names">Raymond & Karen</div>
+        
+        <div class="details">
+            <p><strong>誠摯邀請您參與我們的婚禮</strong></p>
+            <p>📅 日期：2027年1月16日</p>
+            <p>📍 地點：婚宴御苑酒店宴會廳</p>
+            <p style="margin-top: 15px; color: #aeaeae;">▼ 點擊下方按鈕獲取您的專屬報到編號 ▼</p>
+        </div>
+
+        <!-- 點擊彈出大框框 -->
+        <button class="btn-show-popup" onclick="toggleModal(true)">📋 顯示我的專屬報到名牌</button>
     </div>
 
-    <div class="container">
-        
-        <div class="guest-section">
-            <div id="guestName" class="guest-name">親愛的賓客</div>
-            <p style="margin: 0; color: #666;">誠邀出席我們的婚禮 <br> Welcome to our wedding</p>
-            <div class="check-in-label">專屬報到編號 <br> Your number</div>
-            <div id="checkInID" class="check-in-code">---</div>
-            <p style="font-size: 20px; color: #b08d57;">請喺接待處出示此代碼報到 <br> Please show in reception</p>
-        </div>
 
-        <a href="https://forms.gle/zYopSP1apm8CwXuKA" target="_blank" class="btn-upload">
-            📸 點此上載及分享當日相片 <br> Click to share photos taken
-        </a>
-
-        <img src="ec.png" alt="Wedding Invitation" class="mid-img">
-
-        <h3 class="section-title">
-            <span class="zh-title">宴客地點及交通</span>
-            <span class="en-title">Location & Transport</span>
-        </h3>
-        <div class="hotel-info">
-            <strong class="hotel-name-row">合和酒店 Hopewell Hotel</strong>
-            <strong>19樓 水晶殿 Crystal Court @19F</strong><br>
-            <span class="address-text">| 灣仔堅尼地道 15 號 | <br> 15 Kennedy Rd, Wan Chai</span>
-        </div>
-        
-        <div class="map-box">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3692.075619133127!2d114.16856837595348!3d22.275125179704784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34040142442cf219%3A0xf1d954082fbb9a28!2sHopewell%20Hotel!5e0!3m2!1sen!2shk!4v1777092230192!5m2!1sen!2shk" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-        
-        <a href="https://maps.app.goo.gl/JpUaQKW5dXCygbu47" target="_blank" class="btn-nav">📍 開啟 Google Maps 導航</a>
-
-        <div style="text-align: left; padding: 0 15px; font-size: 20px;">
-            <p>🚇 <strong>港鐵 MTR：</strong> 灣仔站 B2 出口步行約 10 分鐘 (Wan Chai Station Exit B2)</p>
-            <p>🚌 <strong>交通建議：</strong> 合和中心設有升降機連接皇后大道東及堅尼地道 (Access via Hopewell Centre lifts)</p>
-        </div>
-
-        <h3 class="section-title">分享喜悅 Blessing</h3>
-        <div class="payment-box">
-            <p style="margin-bottom: 20px; font-weight: bold; font-size: 25px;"> ~可以入咗落靚靚利是封，親手係現場送上祝福架~  <br> PayMe 掃描/點擊送上祝福 <br> <span style="font-size: 20px; font-weight: normal; color: #666;">Scan or Click for gives</span></p>
-            <div class="payme-grid">
-                <div class="payme-item">
-                    <a href="https://payme.hsbc/kazc" class="pay-link-wrapper" target="_blank">
-                        <img src="kpm.jpg" alt="PayMe kpm" class="qr-img">
-                        <span class="pay-link"><br> 為 Kaz 送上祝福 </span>
-                    </a>
-                </div>
-                <div class="payme-item">
-                    <a href="https://payme.hsbc/ricoc" class="pay-link-wrapper" target="_blank">
-                        <img src="rpm.jpg" alt="PayMe rpm" class="qr-img">
-                        <span class="pay-link"><br> 為 Rico 送上祝福 </span>
-                    </a>
-                </div>
+    <!-- ========================================== -->
+    /* ✨ 大框大字 Pop-up 視窗 HTML 結構 ✨ */
+    <!-- ========================================== -->
+    <div id="weddingModal" class="modal-overlay">
+        <div class="modal-box">
+            <h3>✨ 婚禮專屬報到名牌 ✨</h3>
+            
+            <!-- 自動帶入賓客姓名 -->
+            <div class="guest-welcome">
+                親愛的 <span id="lblGuestName" style="color: #d63384;">賓客</span>：
             </div>
+            
+            <!-- 大號碼區域 -->
+            <div class="no-badge-container">
+                <div class="no-label">席位報到編號</div>
+                <div id="lblGuestNo" class="no-number">---</div>
+            </div>
+            
+            <p class="modal-hint">
+                💡 <strong>溫馨提示：</strong><br>
+                請於當天抵達婚宴接待處時，<br>
+                <strong>出示此畫面</strong> 給工作人員，即可快速完成簽到引座喔！
+            </p>
+            
+            <button class="btn-close" onclick="toggleModal(false)">確定並關閉</button>
         </div>
-
-        <footer>Thank you for being part of our big day!</footer>
     </div>
 
-    <!-- 彈出視窗 -->
-    <div id="popup" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:#fff; color:#000; padding:20px; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.5); max-width:300px; text-align:center; z-index:9999;">
-        <p>
-            記得早啲嚟，我地5點恭候，<br>
-            唔少遊戲同打卡等住你嚟玩同欣賞ga~<br><br>
-            Remember to come early!<br>
-            We’ll be waiting at 5 PM,<br>
-            with fun games and photo spots for you to enjoy!
-        </p>
-        <button onclick="document.getElementById('popup').style.display='none'">關閉 / Close</button>
-    </div>
 
     <script>
-        // 自動解析網址參數
-        const urlParams = new URLSearchParams(window.location.search);
-        const nameParam = urlParams.get('name');
-        const idParam = urlParams.get('id');
-
-        if (nameParam) {
-            document.getElementById('guestName').innerText = "親愛的 " + nameParam;
-            // 如果有名字參數，順便自動打開彈出視窗提醒早到
-            setTimeout(() => {
-                document.getElementById('popup').style.display = 'block';
-            }, 1000);
+        // 自動解析網址內 URL 的參數 (?id=xxx&name=xxx&no=xxx)
+        function getUrlParams() {
+            const params = {};
+            const search = window.location.search.substring(1);
+            if (search) {
+                const pairs = search.split("&");
+                for (let i = 0; i < pairs.length; i++) {
+                    const pair = pairs[i].split("=");
+                    if (pair.length === 2) {
+                        params[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1]);
+                    }
+                }
+            }
+            return params;
         }
-        if (idParam) {
-            document.getElementById('checkInID').innerText = idParam;
+
+        // 網頁載入時自動執行
+        window.onload = function() {
+            const urlParams = getUrlParams();
+            
+            // 讀取名字（若網址無攜帶則顯示「貴賓」）
+            const guestName = urlParams['name'] || '貴賓';
+            // 讀取專屬編號（若網址無攜帶則顯示「000」）
+            const guestNo = urlParams['no'] || urlParams['id'] || '000';
+            
+            // 寫入到 HTML 中
+            document.getElementById('lblGuestName').innerText = guestName;
+            document.getElementById('lblGuestNo').innerText = guestNo;
+            
+            // 為了方便賓客，一打開網頁時直接「自動彈出」這個大大的報到框！
+            setTimeout(() => {
+                toggleModal(true);
+            }, 600);
+        };
+
+        // 控制彈窗打開與關閉的指令
+        function toggleModal(show) {
+            const modal = document.getElementById('weddingModal');
+            if (show) {
+                modal.classList.add('active');
+            } else {
+                modal.classList.remove('active');
+            }
         }
     </script>
 
