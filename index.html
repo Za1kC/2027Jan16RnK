@@ -178,16 +178,22 @@
 
     <div class="container">
         
-        <div class="guest-section">
-            <div id="guestName" class="guest-name">親愛的賓客</div>
-            <p style="margin: 0; color: #666;">誠邀出席我們的婚禮 <br> Welcome to our wedding</p>
-            <div class="check-in-label">專屬報到編號 <br> Your number</div>
-            <div id="checkInID" class="check-in-code">---</div>
-            <p style="font-size: 20px; color: #b08d57;">請喺接待處出示此代碼報到 <br> Please show in reception</p>
+	<div class="guest-section">
+       		<div id="guestName" class="guest-name">親愛的賓客</div>
+       		<p style="margin: 0; color: #666;">誠邀出席我們的婚禮 <br> Welcome to our wedding</p>
+        
+        <!-- 【新增】枱號顯示區塊 -->
+       		<div style="margin: 15px 0; font-size: 22px;">
+            枱號 Table：<span id="guestTable" style="background: #f8d7da; color: #721c24; padding: 4px 15px; border-radius: 8px; font-weight: bold;">---</span>
         </div>
 
+        <div class="check-in-label">專屬報到編號 <br> Your number</div>
+        <div id="checkInID" class="check-in-code">---</div>
+        <p style="font-size: 20px; color: #b08d57;">請喺接待處出示此代碼報到 <br> Please show in reception</p>
+  	</div>
+
         <a href="https://forms.gle/zYopSP1apm8CwXuKA" target="_blank" class="btn-upload">
-            📸 點此上載及分享當日相片 <br> Click to share photos taken
+            📸 點此上載及分享當日相片 (容量有限，可以私下PM send比我地) <br> Click to share photos taken.Limited storage, can also DM us to send pics.
         </a>
 
         <img src="ec.png" alt="Wedding Invitation" class="mid-img">
@@ -268,23 +274,30 @@
         </div>
     </div>
 
-    <script>
-        // 自動解析網址參數 (?name=xxx&id=xxx)
+<script>
+        // 自動解析網址參數 (?name=xxx&id=xxx&table=xxx)
         const urlParams = new URLSearchParams(window.location.search);
         const nameParam = urlParams.get('name');
         const idParam = urlParams.get('id');
+        const tableParam = urlParams.get('table'); // 接收枱號參數
 
-        // 讀取名字與編號（如果網址無帶參數，預設顯示賓客及代碼）
+        // 讀取名字、編號與枱號（如果網址無帶參數，顯示預設值）
         const guestName = nameParam ? nameParam : '賓客';
         const checkInId = idParam ? idParam : '---';
+        const guestTable = tableParam ? tableParam : '待定 / Reception';
 
         // 填入主頁面
         document.getElementById('guestName').innerText = nameParam ? "親愛的 " + nameParam : "親愛的賓客";
         document.getElementById('checkInID').innerText = checkInId;
+        document.getElementById('guestTable').innerText = guestTable; // 填入主頁面枱號
 
-        // 填入 Pop-up 彈出視窗
+        // 填入 Pop-up 彈出視窗 (如果你有在 Popup 加 popupTable 元素的話)
         document.getElementById('popupGuestName').innerText = guestName;
         document.getElementById('popupCheckInID').innerText = checkInId;
+        const popupTableEl = document.getElementById('popupTable');
+        if(popupTableEl) {
+            popupTableEl.innerText = guestTable;
+        }
 
         // 網頁開啟 1.5 秒 (1500ms) 後「自動彈出」高質感名牌 Popup
         window.addEventListener('load', () => {
