@@ -21,7 +21,7 @@
 
         /* 1. 主頁面的客人名及報到數字區 */
         .guest-section { background: white; padding: 35px 20px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-top: -50px; position: relative; z-index: 10; }
-        .guest-name { font-size: 40px; color: #b08d57; margin-bottom: 5px; font-weight: bold; }
+        .guest-name { font-size: 40px; color: #d63384; margin-bottom: 5px; font-weight: bold; }
         .check-in-label { font-size: 20px; letter-spacing: 5px; color: #999; text-transform: uppercase; margin-top: 15px; }
         .check-in-code { font-size: 100px; font-weight: bold; color: #d63384; margin: 0; font-family: 'Arial', sans-serif; }
 
@@ -385,7 +385,7 @@ try {
     });
 
     function updateUI(name, table) {
-        document.getElementById('guestName').innerText = (name !== '親愛的賓客') ? "Dear" + name : "親愛的賓客";
+        document.getElementById('guestName').innerText = (name !== '親愛的賓客') ? "Dear " + name : "親愛的賓客";
         document.getElementById('checkInID').innerText = checkInId;
         document.getElementById('guestTable').innerText = table;
 
