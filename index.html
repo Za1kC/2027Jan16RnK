@@ -308,7 +308,7 @@ try {
                 
                 for (let i = 0; i < text.length; i++) {
                     let c = text[i];
-                    let nextC = text[i + 1];
+                    let nextC = text[i + 1] ? text[i + 1] : '';
                     
                     if (c === '"' && inQuotes && nextC === '"') {
                         row[row.length - 1] += '"';
@@ -341,34 +341,39 @@ try {
             let tableIndex = 1;
             let nameIndex = 2;
 
-            // 先檢查第一行標題，自動偵測 ID, table, Name 分別喺第幾欄
+            // 💡 先檢查第一行標題，自動偵測 ID, table, Name 分別喺第幾欄（自動過濾 BOM 符號）
             if (rows.length > 0) {
                 let headers = rows[0];
                 headers.forEach((h, idx) => {
-                    let cleanH = h.replace(/["\r]/g, '').trim().toLowerCase();
+                    let cleanH = h.replace(/["\r\ufeff]/g, '').trim().toLowerCase();
                     if (cleanH.includes('id') || cleanH.includes('編號')) idIndex = idx;
                     if (cleanH.includes('table') || cleanH.includes('枱') || cleanH.includes('台')) tableIndex = idx;
                     if (cleanH.includes('name') || cleanH.includes('姓名') || cleanH.includes('名字')) nameIndex = idx;
                 });
             }
 
-            // 開始從第 2 行尋找對應的 id
-            for (let i = 1; i < rows.length; i++) {
-                let cols = rows[i];
-                if (!cols || cols.length <= idIndex) continue;
-                
-                let rawId = cols[idIndex] ? cols[idIndex].replace(/["\r]/g, '').trim() : '';
-                // 自動補齊編號位數（例如 "13" 或 "013" 都能匹配）
-                let excelId = rawId.padStart(3, '0');
-                let targetId = idParam.trim().padStart(3, '0');
+            // 如果網址冇帶 id 參數，就唔需要尋找
+            if (idParam) {
+                // 開始從第 2 行尋找對應的 id
+                for (let i = 1; i < rows.length; i++) {
+                    let cols = rows[i];
+                    if (!cols || cols.length <= idIndex) continue;
+                    
+                    let rawId = cols[idIndex] ? cols[idIndex].replace(/["\r\ufeff]/g, '').trim() : '';
+                    if (!rawId) continue;
 
-                let excelTable = cols[tableIndex] ? cols[tableIndex].replace(/["\r]/g, '').trim() : '';
-                let excelName = cols[nameIndex] ? cols[nameIndex].replace(/["\r]/g, '').trim() : '';
+                    // 統一轉成數字或者標準字串比對（支援 "1", "01", "001" 互通）
+                    let excelIdNum = parseInt(rawId, 10);
+                    let targetIdNum = parseInt(idParam, 10);
 
-                if (excelId === targetId || rawId === idParam.trim()) {
-                    foundTable = excelTable;
-                    foundName = excelName;
-                    break;
+                    let excelTable = cols[tableIndex] ? cols[tableIndex].replace(/["\r]/g, '').trim() : '';
+                    let excelName = cols[nameIndex] ? cols[nameIndex].replace(/["\r]/g, '').trim() : '';
+
+                    if ((!isNaN(excelIdNum) && !isNaN(targetIdNum) && excelIdNum === targetIdNum) || rawId === idParam.trim()) {
+                        foundTable = excelTable;
+                        foundName = excelName;
+                        break;
+                    }
                 }
             }
 
@@ -380,7 +385,6 @@ try {
             console.error('無法讀取雲端名單:', error);
             updateUI('親愛的賓客', '待定 / Reception');
         }
-
         setTimeout(() => { openModal(); }, 1500);
     });
 
