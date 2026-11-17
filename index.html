@@ -179,7 +179,7 @@
     <div class="container">
         
 	<div class="guest-section">
-       		<div id="guestName" class="guest-name">親愛的賓客</div>
+	<div class="guest-name" style="color: #b08d57;">Dear <span id="guestName" style="color: #d63384;">賓客</span></div>  
        		<p style="margin: 0; color: #666;">誠邀出席我們的婚禮 <br> Welcome to our wedding</p>
         
         <!-- 【新增】枱號顯示區塊 -->
@@ -385,7 +385,7 @@ try {
     });
 
     function updateUI(name, table) {
-        document.getElementById('guestName').innerText = (name !== '親愛的賓客') ? "Dear " + name : "親愛的賓客";
+	document.getElementById('guestName').innerText = (name !== '親愛的賓客') ? name : '賓客';
         document.getElementById('checkInID').innerText = checkInId;
         document.getElementById('guestTable').innerText = table;
 
