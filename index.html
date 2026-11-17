@@ -280,8 +280,9 @@
     </div>
 
 <script>
-    // 🔗 填入你 OneDrive Excel 轉成 CSV 的公開讀取連結
-const ONEDRIVE_CSV_URL = 'https://api.onedrive.com/v1.0/shares/u!s!A.../root/content';
+// 🔗 已轉換為微軟 OneDrive 專用直讀 CSV 連結（完全自動同步）
+    const ONEDRIVE_CSV_URL = 'https://onedrive.live.com/download?cid=91A80F8DEB164CA5&resid=91A80F8DEB164CA5!105&authkey=!IQCubJv5b8x4TJ6pvab5XSz2ARy_E9nvRQz14D1ybaFVl4U&action=embedview&w=2&ed=1&format=csv';
+// 自動解析短網址參數 (例如 ?id=001)
     const urlParams = new URLSearchParams(window.location.search);
     const idParam = urlParams.get('id');
     const checkInId = (idParam && idParam.trim() !== '') ? idParam.trim() : '---';
