@@ -280,41 +280,71 @@
     </div>
 
 <script>
-    // 1. 解析網址參數 (?id=xxx&name=xxx&table=xxx)
+    // 🔗 填入你 OneDrive Excel 轉成 CSV 的公開讀取連結
+    const ONEDRIVE_CSV_URL = https://1drv.ms/x/c/91a80f8deb164ca5/IQCubJv5b8x4TJ6pvab5XSz2ARy_E9nvRQz14D1ybaFVl4U?e=jtlf6n;
+
     const urlParams = new URLSearchParams(window.location.search);
     const idParam = urlParams.get('id');
-    const nameParam = urlParams.get('name');
-    const tableParam = urlParams.get('table');
-
-    // 2. 智能預設值處理（如果預留位未有名或未有枱號，自動顯示友善提示）
     const checkInId = (idParam && idParam.trim() !== '') ? idParam.trim() : '---';
-    const guestName = (nameParam && nameParam.trim() !== '') ? nameParam.trim() : '親愛的賓客';
-    const guestTable = (tableParam && tableParam.trim() !== '') ? tableParam.trim() : '待定 / Reception';
 
-    // 3. 填入主頁面
-    // 如果有名字就顯示「親愛的 XXX」，冇名字（預留位）就直接顯示「親愛的賓客」
-    document.getElementById('guestName').innerText = (nameParam && nameParam.trim() !== '') 
-        ? "親愛的 " + guestName 
-        : "親愛的賓客";
-        
-    document.getElementById('checkInID').innerText = checkInId;
-    document.getElementById('guestTable').innerText = guestTable;
+    window.addEventListener('load', async () => {
+        updateUI('賓客', '待定 / Reception');
 
-    // 4. 填入 Pop-up 彈出視窗
-    document.getElementById('popupGuestName').innerText = (nameParam && nameParam.trim() !== '') ? guestName : '賓客';
-    document.getElementById('popupCheckInID').innerText = checkInId;
-    
-    const popupTableEl = document.getElementById('popupTable');
-    if (popupTableEl) {
-        popupTableEl.innerText = guestTable;
-    }
+        if (!idParam) {
+            setTimeout(() => { openModal(); }, 1500);
+            return;
+        }
 
-    // 5. 網頁開啟 1.5 秒後自動彈出 Popup
-    window.addEventListener('load', () => {
-        setTimeout(() => {
-            openModal();
-        }, 1500);
+        try {
+            const response = await fetch(ONEDRIVE_CSV_URL);
+            const csvText = await response.text();
+            const rows = csvText.split('\n');
+            
+            let foundName = '';
+            let foundTable = '';
+
+            // 從 i = 1 開始讀（自動跳過第 1 行標題 ID, table, Name, Phone）
+            for (let i = 1; i < rows.length; i++) {
+                let cols = rows[i].split(/,|\t/);
+                if (cols.length >= 3) {
+                    let excelId = cols[0].replace(/["\r]/g, '').trim();    // A欄: ID
+                    let excelTable = cols[1].replace(/["\r]/g, '').trim(); // B欄: table
+                    let excelName = cols[2].replace(/["\r]/g, '').trim();  // C欄: Name
+                    // D欄 (cols[3]) 電話號碼在此不讀取，保護賓客私隱
+
+                    if (excelId === idParam.trim()) {
+                        foundTable = excelTable;
+                        foundName = excelName;
+                        break;
+                    }
+                }
+            }
+
+            const finalName = (foundName && foundName !== '') ? foundName : '親愛的賓客';
+            const finalTable = (foundTable && foundTable !== '') ? foundTable : '待定 / Reception';
+            updateUI(finalName, finalTable);
+
+        } catch (error) {
+            console.error('無法讀取雲端名單:', error);
+            updateUI('親愛的賓客', '待定 / Reception');
+        }
+
+        setTimeout(() => { openModal(); }, 1500);
     });
+
+    function updateUI(name, table) {
+        document.getElementById('guestName').innerText = (name !== '親愛的賓客') ? "親愛的 " + name : "親愛的賓客";
+        document.getElementById('checkInID').innerText = checkInId;
+        document.getElementById('guestTable').innerText = table;
+
+        document.getElementById('popupGuestName').innerText = (name !== '親愛的賓客') ? name : '賓客';
+        document.getElementById('popupCheckInID').innerText = checkInId;
+        
+        const popupTableEl = document.getElementById('popupTable');
+        if (popupTableEl) {
+            popupTableEl.innerText = table;
+        }
+    }
 
     function openModal() {
         document.getElementById('popupModal').classList.add('active');
