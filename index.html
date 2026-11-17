@@ -280,46 +280,59 @@
     </div>
 
 <script>
-        // 自動解析網址參數 (?name=xxx&id=xxx&table=xxx)
-        const urlParams = new URLSearchParams(window.location.search);
-        const nameParam = urlParams.get('name');
-        const idParam = urlParams.get('id');
-        const tableParam = urlParams.get('table'); // 接收枱號參數
+    // 1. 建立一個對應表（將 ID 對應返 姓名 同 枱號）
+    // 之後你只需要喺呢度加更多賓客資料，例如 '002': { name: '張小玲', table: '第1席' }
+    const guestDatabase = {
+        '001': { name: 'Van Rathbun', table: 'K2' },
+        '002': { name: '陳大明', table: '主家席' },
+        '003': { name: '張小玲', table: '第1席' }
+        // 如此類推，繼續喺下面加...
+    };
 
-        // 讀取名字、編號與枱號（如果網址無帶參數，顯示預設值）
-        const guestName = nameParam ? nameParam : '賓客';
-        const checkInId = idParam ? idParam : '---';
-        const guestTable = tableParam ? tableParam : '待定 / Reception';
+    // 2. 自動解析網址只捉取 id 參數 (?id=001)
+    const urlParams = new URLSearchParams(window.location.search);
+    const idParam = urlParams.get('id');
 
-        // 填入主頁面
-        document.getElementById('guestName').innerText = nameParam ? "親愛的 " + nameParam : "親愛的賓客";
-        document.getElementById('checkInID').innerText = checkInId;
-        document.getElementById('guestTable').innerText = guestTable; // 填入主頁面枱號
+    // 3. 根據 id 去對應表尋找資料
+    let guestName = '賓客';
+    let checkInId = idParam ? idParam : '---';
+    let guestTable = '待定 / Reception';
 
-        // 填入 Pop-up 彈出視窗 (如果你有在 Popup 加 popupTable 元素的話)
-        document.getElementById('popupGuestName').innerText = guestName;
-        document.getElementById('popupCheckInID').innerText = checkInId;
-        const popupTableEl = document.getElementById('popupTable');
-        if(popupTableEl) {
-            popupTableEl.innerText = guestTable;
-        }
+    if (idParam && guestDatabase[idParam]) {
+        guestName = guestDatabase[idParam].name;
+        guestTable = guestDatabase[idParam].table;
+    }
 
-        // 網頁開啟 1.5 秒 (1500ms) 後「自動彈出」高質感名牌 Popup
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                openModal();
-            }, 1500);
-        });
+    // 4. 填入主頁面
+    document.getElementById('guestName').innerText = "親愛的 " + guestName;
+    document.getElementById('checkInID').innerText = checkInId;
+    document.getElementById('guestTable').innerText = guestTable;
 
-        // 彈窗控制 Function
-        function openModal() {
-            document.getElementById('popupModal').classList.add('active');
-        }
+    // 5. 填入 Pop-up 彈出視窗
+    document.getElementById('popupGuestName').innerText = guestName;
+    document.getElementById('popupCheckInID').innerText = checkInId;
+    const popupTableEl = document.getElementById('popupTable');
+    if(popupTableEl) {
+        popupTableEl.innerText = guestTable;
+    }
 
-        function closeModal() {
-            document.getElementById('popupModal').classList.remove('active');
-        }
-    </script>
+    // 網頁開啟 1.5 秒後自動彈出
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            openModal();
+        }, 1500);
+    });
+
+    // 彈窗控制 Function
+    function openModal() {
+        document.getElementById('popupModal').classList.add('active');
+    }
+
+    function closeModal() {
+        document.getElementById('popupModal').classList.remove('active');
+    }
+</script>
+
 
 </body>
 </html>
