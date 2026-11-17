@@ -296,10 +296,43 @@
             return;
         }
 
-        try {
+try {
             const response = await fetch(ONEDRIVE_CSV_URL);
             const csvText = await response.text();
-            const rows = csvText.split(/\r\n|\n/); // 兼容不同系統的換行符
+            
+            // 💡 專業 CSV 解析函數（完美解決 Excel 內置換行導致斷行錯亂的問題）
+            function parseCSV(text) {
+                let lines = [];
+                let row = [''];
+                let inQuotes = false;
+                
+                for (let i = 0; i < text.length; i++) {
+                    let c = text[i];
+                    let nextC = text[i + 1];
+                    
+                    if (c === '"' && inQuotes && nextC === '"') {
+                        row[row.length - 1] += '"';
+                        i++;
+                    } else if (c === '"') {
+                        inQuotes = !inQuotes;
+                    } else if (c === ',' && !inQuotes) {
+                        row.push('');
+                    } else if ((c === '\r' && nextC === '\n') && !inQuotes) {
+                        lines.push(row);
+                        row = [''];
+                        i++;
+                    } else if ((c === '\n' || c === '\r') && !inQuotes) {
+                        lines.push(row);
+                        row = [''];
+                    } else {
+                        row[row.length - 1] += c;
+                    }
+                }
+                if (row.length > 1 || row[0] !== '') lines.push(row);
+                return lines;
+            }
+
+            const rows = parseCSV(csvText);
             
             let foundName = '';
             let foundTable = '';
@@ -310,7 +343,7 @@
 
             // 先檢查第一行標題，自動偵測 ID, table, Name 分別喺第幾欄
             if (rows.length > 0) {
-                let headers = rows[0].split(/,|\t/);
+                let headers = rows[0];
                 headers.forEach((h, idx) => {
                     let cleanH = h.replace(/["\r]/g, '').trim().toLowerCase();
                     if (cleanH.includes('id') || cleanH.includes('編號')) idIndex = idx;
@@ -321,19 +354,21 @@
 
             // 開始從第 2 行尋找對應的 id
             for (let i = 1; i < rows.length; i++) {
-                if (!rows[i].trim()) continue;
-                let cols = rows[i].split(/,|\t/);
+                let cols = rows[i];
+                if (!cols || cols.length <= idIndex) continue;
                 
-                if (cols.length > idIndex) {
-                    let excelId = cols[idIndex] ? cols[idIndex].replace(/["\r]/g, '').trim() : '';
-                    let excelTable = cols[tableIndex] ? cols[tableIndex].replace(/["\r]/g, '').trim() : '';
-                    let excelName = cols[nameIndex] ? cols[nameIndex].replace(/["\r]/g, '').trim() : '';
+                let rawId = cols[idIndex] ? cols[idIndex].replace(/["\r]/g, '').trim() : '';
+                // 自動補齊編號位數（例如 "13" 或 "013" 都能匹配）
+                let excelId = rawId.padStart(3, '0');
+                let targetId = idParam.trim().padStart(3, '0');
 
-                    if (excelId === idParam.trim()) {
-                        foundTable = excelTable;
-                        foundName = excelName;
-                        break;
-                    }
+                let excelTable = cols[tableIndex] ? cols[tableIndex].replace(/["\r]/g, '').trim() : '';
+                let excelName = cols[nameIndex] ? cols[nameIndex].replace(/["\r]/g, '').trim() : '';
+
+                if (excelId === targetId || rawId === idParam.trim()) {
+                    foundTable = excelTable;
+                    foundName = excelName;
+                    break;
                 }
             }
 
@@ -350,7 +385,7 @@
     });
 
     function updateUI(name, table) {
-        document.getElementById('guestName').innerText = (name !== '親愛的賓客') ? "親愛~" + name : "親愛的賓客";
+        document.getElementById('guestName').innerText = (name !== '親愛的賓客') ? "Dear" + name : "親愛的賓客";
         document.getElementById('checkInID').innerText = checkInId;
         document.getElementById('guestTable').innerText = table;
 
