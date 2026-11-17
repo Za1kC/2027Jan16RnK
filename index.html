@@ -294,22 +294,38 @@ const ONEDRIVE_CSV_URL = 'https://api.onedrive.com/v1.0/shares/u!s!A.../root/con
             return;
         }
 
-        try {
+try {
             const response = await fetch(ONEDRIVE_CSV_URL);
             const csvText = await response.text();
-            const rows = csvText.split('\n');
+            const rows = csvText.split(/\r\n|\n/); // 兼容不同系統的換行符
             
             let foundName = '';
             let foundTable = '';
+            
+            let idIndex = 0;
+            let tableIndex = 1;
+            let nameIndex = 2;
 
-            // 從 i = 1 開始讀（自動跳過第 1 行標題 ID, table, Name, Phone）
+            // 先檢查第一行標題，自動偵測 ID, table, Name 分別喺第幾欄
+            if (rows.length > 0) {
+                let headers = rows[0].split(/,|\t/);
+                headers.forEach((h, idx) => {
+                    let cleanH = h.replace(/["\r]/g, '').trim().toLowerCase();
+                    if (cleanH.includes('id') || cleanH.includes('編號')) idIndex = idx;
+                    if (cleanH.includes('table') || cleanH.includes('枱') || cleanH.includes('台')) tableIndex = idx;
+                    if (cleanH.includes('name') || cleanH.includes('姓名') || cleanH.includes('名字')) nameIndex = idx;
+                });
+            }
+
+            // 開始從第 2 行尋找對應的 id
             for (let i = 1; i < rows.length; i++) {
+                if (!rows[i].trim()) continue;
                 let cols = rows[i].split(/,|\t/);
-                if (cols.length >= 3) {
-                    let excelId = cols[0].replace(/["\r]/g, '').trim();    // A欄: ID
-                    let excelTable = cols[1].replace(/["\r]/g, '').trim(); // B欄: table
-                    let excelName = cols[2].replace(/["\r]/g, '').trim();  // C欄: Name
-                    // D欄 (cols[3]) 電話號碼在此不讀取，保護賓客私隱
+                
+                if (cols.length > idIndex) {
+                    let excelId = cols[idIndex] ? cols[idIndex].replace(/["\r]/g, '').trim() : '';
+                    let excelTable = cols[tableIndex] ? cols[tableIndex].replace(/["\r]/g, '').trim() : '';
+                    let excelName = cols[nameIndex] ? cols[nameIndex].replace(/["\r]/g, '').trim() : '';
 
                     if (excelId === idParam.trim()) {
                         foundTable = excelTable;
@@ -327,7 +343,7 @@ const ONEDRIVE_CSV_URL = 'https://api.onedrive.com/v1.0/shares/u!s!A.../root/con
             console.error('無法讀取雲端名單:', error);
             updateUI('親愛的賓客', '待定 / Reception');
         }
-
+      
         setTimeout(() => { openModal(); }, 1500);
     });
 
