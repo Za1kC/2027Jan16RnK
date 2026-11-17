@@ -281,8 +281,7 @@
 
 <script>
     // 🔗 填入你 OneDrive Excel 轉成 CSV 的公開讀取連結
-    const ONEDRIVE_CSV_URL = https://1drv.ms/x/c/91a80f8deb164ca5/IQCubJv5b8x4TJ6pvab5XSz2ARy_E9nvRQz14D1ybaFVl4U?e=jtlf6n;
-
+const ONEDRIVE_CSV_URL = 'https://api.onedrive.com/v1.0/shares/u!s!A.../root/content';
     const urlParams = new URLSearchParams(window.location.search);
     const idParam = urlParams.get('id');
     const checkInId = (idParam && idParam.trim() !== '') ? idParam.trim() : '---';
