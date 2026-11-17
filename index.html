@@ -280,50 +280,42 @@
     </div>
 
 <script>
-    // 1. 建立一個對應表（將 ID 對應返 姓名 同 枱號）
-    // 之後你只需要喺呢度加更多賓客資料，例如 '002': { name: '張小玲', table: '第1席' }
-    const guestDatabase = {
-        '001': { name: 'Van Rathbun', table: 'K2' },
-        '002': { name: '陳大明', table: '主家席' },
-        '003': { name: '張小玲', table: '第1席' }
-        // 如此類推，繼續喺下面加...
-    };
-
-    // 2. 自動解析網址只捉取 id 參數 (?id=001)
+    // 1. 解析網址參數 (?id=xxx&name=xxx&table=xxx)
     const urlParams = new URLSearchParams(window.location.search);
     const idParam = urlParams.get('id');
+    const nameParam = urlParams.get('name');
+    const tableParam = urlParams.get('table');
 
-    // 3. 根據 id 去對應表尋找資料
-    let guestName = '賓客';
-    let checkInId = idParam ? idParam : '---';
-    let guestTable = '待定 / Reception';
+    // 2. 智能預設值處理（如果預留位未有名或未有枱號，自動顯示友善提示）
+    const checkInId = (idParam && idParam.trim() !== '') ? idParam.trim() : '---';
+    const guestName = (nameParam && nameParam.trim() !== '') ? nameParam.trim() : '親愛的賓客';
+    const guestTable = (tableParam && tableParam.trim() !== '') ? tableParam.trim() : '待定 / Reception';
 
-    if (idParam && guestDatabase[idParam]) {
-        guestName = guestDatabase[idParam].name;
-        guestTable = guestDatabase[idParam].table;
-    }
-
-    // 4. 填入主頁面
-    document.getElementById('guestName').innerText = "親愛的 " + guestName;
+    // 3. 填入主頁面
+    // 如果有名字就顯示「親愛的 XXX」，冇名字（預留位）就直接顯示「親愛的賓客」
+    document.getElementById('guestName').innerText = (nameParam && nameParam.trim() !== '') 
+        ? "親愛的 " + guestName 
+        : "親愛的賓客";
+        
     document.getElementById('checkInID').innerText = checkInId;
     document.getElementById('guestTable').innerText = guestTable;
 
-    // 5. 填入 Pop-up 彈出視窗
-    document.getElementById('popupGuestName').innerText = guestName;
+    // 4. 填入 Pop-up 彈出視窗
+    document.getElementById('popupGuestName').innerText = (nameParam && nameParam.trim() !== '') ? guestName : '賓客';
     document.getElementById('popupCheckInID').innerText = checkInId;
+    
     const popupTableEl = document.getElementById('popupTable');
-    if(popupTableEl) {
+    if (popupTableEl) {
         popupTableEl.innerText = guestTable;
     }
 
-    // 網頁開啟 1.5 秒後自動彈出
+    // 5. 網頁開啟 1.5 秒後自動彈出 Popup
     window.addEventListener('load', () => {
         setTimeout(() => {
             openModal();
         }, 1500);
     });
 
-    // 彈窗控制 Function
     function openModal() {
         document.getElementById('popupModal').classList.add('active');
     }
@@ -332,7 +324,6 @@
         document.getElementById('popupModal').classList.remove('active');
     }
 </script>
-
 
 </body>
 </html>
